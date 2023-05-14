@@ -1,0 +1,15 @@
+{% extends 'acceuil.html' %}
+
+{% block content %}
+  <h1>Admin Panel</h1>
+  {% if projects_to_approve %}
+    <h2>Projects to Approve:</h2>
+    <ul>
+      {% for project in projects_to_approve %}
+        <li><a href="{% url 'approve_project' project.pk %}">{{ project.libelle }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no projects to approve.</p>
+  {% endif %}
+{% endblock %}

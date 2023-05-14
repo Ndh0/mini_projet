@@ -1,0 +1,66 @@
+{% extends 'acceuil.html' %}
+{% block content %}
+{% load bootstrap5 %}
+{% bootstrap_css %}  
+{% bootstrap_javascript %}
+{% load static %}
+<form method='POST' class="post-form">
+{% csrf_token %}
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for pr in list %}
+      {% if pr.acheve  %}
+      <div class="col" >
+        <div class="card shadow-sm" style="border: 3px solid green;">
+          
+          <div class="card-body" >
+               
+               <p>libelle : {{pr.libelle}} </p> 
+               <p>description : {{pr.description}} </p> 
+               <p>date debut : {{pr.date_debut}} </p>
+               <p>date fin : {{pr.date_fin}} </p>
+               <p>{{pr.services}} </p>
+               <p>{{pr.equipe}} </p> 
+               <button class="btn btn-outline-primary ms-1" style="margin: 5px;"><a href="{% url 'increment_avisp' pr.id %}">{{ pr.avisp }}  like</a>   </button>
+               <button class="btn btn-outline-primary ms-1" style="margin: 5px;"><a href="{% url 'decrement_avisn' pr.id %}">{{ pr.avisn }}  dislike</a>   </button>
+              </br> 
+           
+               <button class="btn btn-outline-primary ms-1" style="margin: 5px;"><a href="{% url 'projet-edit' pr.id %}">Edit</a>   </button>  
+               <button class="btn btn-outline-primary ms-1" style="margin: 5px;"><a href="{% url 'delete-projet' pr.pk %}">Delete</a>   </button> 
+                 
+          </div>
+          
+        </div>
+      </div>
+      {% else %}
+      <div class="col" >
+        <div class="card shadow-sm" style="border: 3px solid red;">
+          
+          <div class="card-body">
+               
+               <p>libelle : {{pr.libelle}} </p> 
+               <p>description : {{pr.description}} </p> 
+               <p>date debut : {{pr.date_debut}} </p>
+               <p>date fin : {{pr.date_fin}} </p>
+               <p>{{pr.services}} </p>
+               <p>{{pr.equipe}} </p> 
+               <button class="btn btn-outline-primary ms-1" style="margin: 5px;"><a href="{% url 'increment_avisp' pr.id %}">{{ pr.avisp }}  like</a>   </button>
+               <button class="btn btn-outline-primary ms-1" style="margin: 5px;"><a href="{% url 'decrement_avisn' pr.id %}">{{ pr.avisn }}  dislike</a>   </button>
+              </br> 
+           
+               <button class="btn btn-outline-primary ms-1" style="margin: 5px;"><a href="{% url 'projet-edit' pr.id %}">Edit</a>   </button>  
+               <button class="btn btn-outline-primary ms-1" style="margin: 5px;"><a href="{% url 'delete-projet' pr.pk %}">Delete</a>   </button> 
+                 
+          </div>
+          
+        </div>
+      </div>
+
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+from django.db import models
+
+class Service(models.Model):
+    types=[
+        ('dg','Design Graphique'),
+        ('pa','Production Audiovisuelle'),
+        ('c3d','Conception 3D')
+    ]   
+    description=models.CharField(max_length=255)
+    type=models.CharField(max_length=255,choices=types,default='dg')
+    def __str__(self):
+        return "\nType : "+self.type+"\n"
+class Detail(models.Model):
+    fichier=models.FileField(upload_to='uploads/',max_length=255)#mediRoot
+class Projet(models.Model):
+    libelle=models.CharField(max_length=255)
+    description=models.CharField(max_length=255)
+    date_debut=models.DateField()
+    date_fin=models.DateField()
+    acheve=models.BooleanField(default=False)
+    #key
+    def __str__(self):
+        return "\nLibelle : "+self.libelle+" DateFin : "+str(self.date_fin)+" Achevee : "+str(self.acheve)
+class Personnel(models.Model):
+    nom=models.CharField(max_length=255)
+    fichier_CV=models.FileField(upload_to='uploads/',max_length=255)
+    fichier_photo=models.ImageField(upload_to='media/',max_length=255)
+    lien_linkedln=models.CharField(max_length=255)
+    def __str__(self):
+        return "\nNom : "+self.nom+" Lien Linkedln : "+self.lien_linkedln
+class Equipe(models.Model):
+    #tableau des personnels !
+    a='a' 

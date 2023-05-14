@@ -1,0 +1,474 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}  
+{% bootstrap_javascript %}
+<head>
+    <style>
+        .testimonial-card .card-up {
+            height: 120px;
+            overflow: hidden;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }
+
+        .testimonial-card .avatar {
+            width: 110px;
+            margin-top: -60px;
+            overflow: hidden;
+            border: 3px solid #fff;
+            border-radius: 50%;
+        }
+
+        body {
+            background-color: #6a93cb;
+            background-image: linear-gradient(315deg, #6a93cb 0%, #a4bfef 74%);
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px
+        }
+
+        .c-details span {
+            font-weight: 300;
+            font-size: 13px
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background-color: #eee;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 39px
+        }
+
+        .badge span {
+            background-color: #fffbec;
+            width: 60px;
+            height: 25px;
+            padding-bottom: 3px;
+            border-radius: 5px;
+            display: flex;
+            color: #fed85d;
+            justify-content: center;
+            align-items: center
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 10px
+        }
+
+        .progress div {
+            background-color: red
+        }
+
+        .text1 {
+            font-size: 14px;
+            font-weight: 600
+        }
+
+        .text2 {
+            color: #a5aec0
+        }
+    </style>
+</head>
+
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 mb-6 border-bottom">
+      <div class="col-md-1 mb-2 mb-md-0">
+        <a href="{% url 'home' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="fs-4">ArtyProd</span>
+          </a>
+      </div>
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'home' %}" class="nav-link px-2 link-secondary" >Home</a></li>
+        <li><a href="#Test" class="nav-link px-2">Portfolio</a></li>
+        <li><a href="#Service" class="nav-link px-2">Services</a></li>
+        <li><a href="#Project" class="nav-link px-2">Projects</a></li>
+        <li><a href="#footer" class="nav-link px-2">Contact</a></li>
+      </ul>
+      <div class="col-md-1 text-end" >
+          {% if user.is_authenticated %}
+          <div class="flex-shrink-0 dropdown" >
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+              {{user}}
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              {% if request.user.is_superuser %}
+              
+              {% endif %}
+              <li><a class="dropdown-item" href="{% url 'projetfilter' %}">My Project</a></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Déconnexion</a></li>
+            </ul>
+          </div>
+          {% else %}
+            <div class="d-flex align-items-center">
+                <a class="nav-link" href="{% url 'login' %}">Connexion</a>
+                <a class="nav-link" href="{% url 'register' %}">Inscription</a>
+            </div>
+          {% endif %} 
+      </div>
+    </header>
+  
+
+<br><br><br><br>
+<div class="container" id="Service">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-xl-8 text-center">
+            <h3 class="mb-4">Services</h3>
+            <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+
+            </p>
+        </div>
+    </div>
+    <!-- Card deck -->
+    <div class="card-deck row">
+
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <!-- Card -->
+            <div class="card">
+
+
+                <!--Card image-->
+                <div class="view overlay">
+                    <img class="card-img-top" src="/media/media/dg.png" alt="Card image cap">
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card content-->
+                <div class="card-body">
+
+                    <!--Title-->
+                    <h4 class="card-title">Design Graphique</h4>
+                    <!--Text-->
+                    <p class="card-text">Le design graphique, c’est la communication visuelle mise en pratique.
+                        Il s’agit d’utiliser des images pour transmettre des informations et des concepts à une
+                        audience.
+                        Mais c’est aussi un terme assez nébuleux, et selon la personne à qui vous parlez,
+                        cela peut totalement varier.</p>
+                    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+
+
+                </div>
+
+            </div>
+            <!-- Card -->
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <!-- Card -->
+            <div class="card mb-4">
+
+                <!--Card image-->
+                <div class="view overlay">
+                    <img class="card-img-top" src="/media/media/conc.jfif" alt="Card image cap" height="276px">
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card content-->
+                <div class="card-body">
+
+                    <!--Title-->
+                    <h4 class="card-title">Conception 3D</h4>
+                    <!--Text-->
+                    <p class="card-text">La conception 3D, ou Conception Assistée par Ordinateur (CAO),
+                        est le processus par lequel sont dessinés des objets en 3D, qui pourront ensuite être produits.
+                        Elle passe par l'utilisation de nombreux logiciels possibles, principalement différenciés par
+                        leur
+                        approche au dessin et par leur prix.</p>
+                    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+
+
+                </div>
+
+            </div>
+            <!-- Card -->
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <!-- Card -->
+            <div class="card mb-4">
+
+                <!--Card image-->
+                <div class="view overlay">
+                    <img class="card-img-top" src="/media/media/scena.png" alt="Card image cap" height="276px">
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card content-->
+                <div class="card-body">
+
+                    <!--Title-->
+                    <h4 class="card-title">Scénarisation</h4>
+                    <!--Text-->
+                    <p class="card-text">La scénarisation est le processus de création
+                        d'un scénario pour une œuvre médiatique, impliquant le développement
+                        d'une histoire cohérente avec des personnages, des événements, des dialogues
+                        et une structure narrative adaptée aux objectifs créatifs et artistiques du projet.</p>
+                    <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+
+
+                </div>
+
+            </div>
+            <!-- Card -->
+        </div>
+
+
+
+
+    </div>
+    <!-- Card deck -->
+
+</div>
+<!--AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaa-->
+<br><br><br><br>
+<div class="container" id="Test">
+    <section>
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 col-xl-8 text-center">
+                <h3 class="mb-4">Testimonials</h3>
+                <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+
+                </p>
+            </div>
+        </div>
+
+        <div class="row text-center d-flex align-items-stretch">
+            <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-stretch">
+                <div class="card testimonial-card">
+                    <div class="card-up" style="background-color: #9d789b;"></div>
+                    <div class="avatar mx-auto bg-white">
+                        <img src="/media/media/musk.jfif" class="rounded-circle img-fluid" />
+                    </div>
+                    <div class="card-body">
+                        <h4 class="mb-4">Elon Musk</h4>
+                        <hr />
+                        <p class="dark-grey-text mt-4">
+                            <i class="fas fa-quote-left pe-2"></i>Je suis tellement reconnaissant envers cette
+                            entreprise pour m'avoir aidé à résoudre mon problème. Leur service client était exceptionnel
+                            et leur produit a vraiment amélioré ma vie.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-stretch">
+                <div class="card testimonial-card">
+                    <div class="card-up" style="background-color: #7a81a8;"></div>
+                    <div class="avatar mx-auto bg-white" style="height: 115px;">
+                        <img src="/media/media/jobs.jfif" class="rounded-circle img-fluid" style="height: 110px;" />
+                    </div>
+                    <div class="card-body">
+                        <h4 class="mb-4">Steve Jobs</h4>
+
+                        <hr />
+                        <p class="dark-grey-text mt-4">
+                            <i class="fas fa-quote-left pe-2"></i>Je suis un client fidèle depuis des années et je
+                            recommande fortement cette marque à tous mes amis et ma famille. Leurs produits sont de
+                            qualité supérieure et leur équipe est toujours prête à aider.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-0 d-flex align-items-stretch">
+                <div class="card testimonial-card">
+                    <div class="card-up" style="background-color: #6d5b98;"></div>
+                    <div class="avatar mx-auto bg-white" style="height: 115px;">
+                        <img src="/media/media/najla.jfif" class="rounded-circle img-fluid" style="height: 110px;" />
+                    </div>
+                    <div class="card-body">
+                        <h4 class="mb-4">Najla Ben Abdullah</h4>
+
+                        <hr />
+                        <p class="dark-grey-text mt-4">
+                            <i class="fas fa-quote-left pe-2"></i>Cette entreprise a dépassé mes attentes à tous les
+                            niveaux. Leur engagement envers la qualité, le service client et la satisfaction des clients
+                            est vraiment impressionnant.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!--AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+
+<div class="album py-5 " id="Project">
+    
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10 col-xl-8 text-center">
+                <h3 class="mb-4">Projets</h3>
+                <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+
+                </p>
+            </div>
+        </div>
+        
+               <div class="container mt-5 mb-3">
+               
+            <div class="row">
+                {% for list in list|dictsortreversed:"avisp"|slice:":3" %}
+                <div class="col-md-4">
+                    <div class="card p-3 mb-2">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="icon"> <img class="bx bxl-mailchimp" src="/media/media/pr.png"
+                                        width="50px"></img> </div>
+                                <div class="ms-2 c-details">
+                                    <h6 class="mb-0">{{list.libelle}}</h6> <span>{{list.date_debut}}</span>
+                                </div>
+                            </div>
+                            <div class="badge"> <span>{{list.services}}</span> </div>
+                        </div>
+                        <div class="mt-5">
+                            <h3 class="heading text-truncate" style="max-width: 250px;">{{list.description}}</h3>
+                            <div class="mt-5">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" id="footer">
+    <footer
+          class="text-center text-lg-start text-white"
+          style=" background: #6a93cb; "
+          >
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">
+              ArtyProd
+            </h6>
+            <p>
+              
+ArtyProd est une agence de design graphique de premier plan qui se consacre à fournir à ses clients des solutions créatives exceptionnelles qui les aident à se démarquer dans le paysage commercial hautement concurrentiel d'aujourd'hui. Avec des années d'expérience et une équipe de designers hautement qualifiés.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+        
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">
+              Useful links
+            </h6>
+            <p>
+              <a class="text-white">Portfolio</a>
+            </p>
+            <p>
+              <a class="text-white">Service</a>
+            </p>
+            <p>
+              <a class="text-white">Contact</a>
+            </p>
+          </div>
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+            <p><img src="/media/media/location-pointer.png" width="25px"></img> Tunisia , Sfax Immeuble Triki </p>
+            <p><img src="/media/media/email.png" width="25px"></img> infoartyprod@gmail.com</p>
+            <p><img src="/media/media/telephone.png" width="25px">   </img> +216 23 215 568</p>
+            <p><img src="/media/media/fax.png" width="25px"></img> +216 74 521 563</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+
+      <hr class="my-3">
+
+      <!-- Section: Copyright -->
+      <section class="p-3 pt-0">
+        <div class="row d-flex align-items-center">
+          <!-- Grid column -->
+          <div class="col-md-7 col-lg-8 text-center text-md-start">
+            <!-- Copyright -->
+            <div class="p-3">
+              © 2023 Copyright:
+              <a class="text-white" href="{%url 'home' %}"
+                 >ArtyProd_Company</a
+                >
+            </div>
+            <!-- Copyright -->
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+            <!-- Facebook -->
+            <a
+               class="btn btn-outline-light btn-floating m-1"
+               class="text-white"
+               role="button"
+               ><img src="/media/media/facebook.png" width="25px">
+                   </img
+              ></a>
+          
+
+            <!-- Twitter -->
+            <a
+               class="btn btn-outline-light btn-floating m-1"
+               class="text-white"
+               role="button"
+               ><img src="/media/media/twitter.png" width="25px"></img
+              ></a>
+
+            <!-- Google -->
+            <a
+               class="btn btn-outline-light btn-floating m-1"
+               class="text-white"
+               role="button"
+               ><img src="/media/media/social.png" width="25px"></img
+              ></a>
+
+            <!-- Instagram -->
+            <a
+               class="btn btn-outline-light btn-floating m-1"
+               class="text-white"
+               role="button"
+               ><img src="/media/media/instagram.png" width="25px"></img
+              ></a>
+          </div>
+          <!-- Grid column -->
+        </div>
+      </section>
+      <!-- Section: Copyright -->
+    </div>
+    <!-- Grid container -->
+  </footer>
+</div>
+

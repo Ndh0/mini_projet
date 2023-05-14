@@ -1,0 +1,52 @@
+{% extends 'acceuil.html' %}
+{% block content %}
+{% load bootstrap5 %}
+{% bootstrap_css %}  
+{% bootstrap_javascript %}
+
+<form method='POST' class="post-form" >
+{% csrf_token %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+    
+      {% for p in list  %}
+      <div class="col ">
+        <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <img src="/media/{{ p.fichier_photo }}" alt="avatar"
+            class="rounded-circle img-fluid" style="width: 150px;height: 200px;">
+          <h5 class="my-3">{{p.nom}}</h5>
+          <p class="text-muted mb-1">{{p.lien_linkedln}}</p>
+          <object data="{{ p.fichier_CV.url }}" type="{{ p.fichier_CV.content_type }}" width="10%" height="50px">
+            <p><a href="{{ p.fichier_CV.url }}">click here to access your cv</a></p>
+        </object>
+          <div class="d-flex justify-content-center mb-2">
+            <button type="button" class="btn btn-outline-primary ms-1"><a href="{% url 'EditPersonnel' p.id %}">Edit</a></button>
+            <button type="button" class="btn btn-outline-primary ms-1"><a href="{% url 'delete-personnel' p.pk %}">Delete</a></button>
+          </div>
+      </div>
+    </div>
+  </div>
+      {% endfor %}
+    
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+  <div class="col ">
+    <div class="card shadow-sm">
+      <!--<img src='/media/{{ article.img }}' class="card-img-top" height="200px"  width="200px">-->
+      <div class="card-body">
+           <p> {{p.nom}} </p> 
+           <p> {{p.lien_linkedln}} </p> 
+           <img src='/media/{{ p.fichier_photo }}' class="card-img-top" height="200px"  width="200px">  
+           <object data="{{ p.fichier_CV.url }}" type="{{ p.fichier_CV.content_type }}" width="10%" height="50px">
+            <p><a href="{{ p.fichier_CV.url }}">{{p.fichier_CV}}</a></p>
+        </object>   
+        <p><a href="{% url 'post-edit' p.id %}">Edit</a></p> 
+        <button><a href="{% url 'delete-personnel' p.pk %}">Delete</a>   </button>
+      </div>
+    </div>
+  </div>

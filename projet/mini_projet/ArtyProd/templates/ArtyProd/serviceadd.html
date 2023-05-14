@@ -1,0 +1,14 @@
+
+{% extends 'acceuil.html' %}
+{% block content %} 
+<div class="modal-body py-4 w-50 p-3">
+    <h5>Ajouter un service :</h5>
+    <form method='POST' class="post-form">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-outline-primary ms-1">Enregistrer</button>
+        </form>
+</div>
+
+ 
+{% endblock %}

@@ -1,0 +1,203 @@
+/**********************C1******************/
+public class StudentController : Controller
+    {
+        readonly IStudentRepository  studentRepository;
+        readonly ISchoolRepository schoolRepository;
+        public StudentController(IStudentRepository stdRepository,ISchoolRepository sclrepository)
+        {
+            studentRepository = stdRepository;
+            schoolRepository = sclrepository;
+
+        }
+        // GET: StudentController
+        public ActionResult Index()
+        {
+            var Students = studentRepository.GetAll();
+            return View(Students);
+        }
+
+        // GET: StudentController/Details/5
+        public ActionResult Details(int id)
+        {
+            var Student = studentRepository.GetById(id);
+            return View(Student);
+        }
+
+        // GET: StudentController/Create
+        public ActionResult Create()
+        {
+            ViewBag.SchoolID = new SelectList(schoolRepository.GetAll(), "SchoolID", "SchoolName");
+            return View();
+        }
+        public ActionResult Search(string name, int? schoolid)
+        {
+            var result = studentRepository.GetAll();
+            if (!string.IsNullOrEmpty(name))
+                result = studentRepository.FindByName(name);
+            else
+            if (schoolid != null)
+                result = studentRepository.GetStudentsBySchoolID(schoolid);
+            ViewBag.SchoolID = new SelectList(schoolRepository.GetAll(), "SchoolID", "SchoolName");
+            return View("Index", result);
+        }
+
+        // POST: StudentController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection, Student s)
+        {
+            try
+            {
+                studentRepository.Add(s);
+                ViewBag.SchoolID = new SelectList(schoolRepository.GetAll(), "SchoolID", "SchoolName");
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: StudentController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            ViewBag.SchoolID = new SelectList(schoolRepository.GetAll(), "SchoolID", "SchoolName");
+            var student = studentRepository.GetById(id);
+            return View(student);
+            
+        }
+
+        // POST: StudentController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int Id,Student ns)
+        {
+            try
+            {
+                ViewBag.SchoolID = new SelectList(schoolRepository.GetAll(), "SchoolID", "SchoolName");
+                studentRepository.Edit(ns);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: StudentController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var student = studentRepository.GetById(id);
+            return View(student);
+        }
+
+        // POST: StudentController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Student S)
+        {
+            try
+            {
+                studentRepository.Delete(S);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+/******************************************************************************************************c2********************************************************************************************/
+public class SchoolController : Controller
+    {
+        // GET: SchoolController
+        readonly ISchoolRepository schoolRepository;
+        public SchoolController(ISchoolRepository sclRepository)
+        {
+            schoolRepository = sclRepository;
+
+        }
+        public ActionResult Index()
+        {
+            var Schools = schoolRepository.GetAll();
+            return View(Schools);
+        }
+
+        // GET: SchoolController/Details/5
+        public ActionResult Details(int id)
+        {
+            var School = schoolRepository.GetById(id);
+            return View(School);
+        }
+
+        // GET: SchoolController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: SchoolController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection,School s)
+        {
+            try
+            {
+                schoolRepository.Add(s);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: SchoolController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var school = schoolRepository.GetById(id);
+            return View(school);
+        }
+
+        // POST: SchoolController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int Id, School ns)
+        {
+            try
+            {
+                schoolRepository.Edit(ns);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: SchoolController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            var school = schoolRepository.GetById(id);
+            return View(school);
+        }
+
+        // POST: SchoolController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id,School S)
+        {
+            try
+            {
+                schoolRepository.Delete(S);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+/***********************************************************************************************************************************************************************/
+using WebApplication4.Models;
+using WebApplication4.Models.Repositories;
